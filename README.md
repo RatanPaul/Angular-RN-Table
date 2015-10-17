@@ -1,7 +1,7 @@
 # Angular-RP-Table
 angular table
 
-# Dependancies
+# Dependencies
 ```
 <link rel="stylesheet" href="bootstrap.css"/>
 <link rel="stylesheet" href="rpTable.css"/>
