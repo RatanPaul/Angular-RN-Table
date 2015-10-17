@@ -10,7 +10,8 @@
                 restrict: 'A',
                 scope:{
                     rpData:"=",
-                    rpColDefs:"="
+                    rpColDefs:"=",
+                    rpItems:"="
                 },
                 templateUrl: 'view/table.html',
                 link: function(scope, element, attrs)
@@ -30,22 +31,47 @@
                            scope.rpColDefs[i].isFilterDisplay = false;
                        }
                     }
-                    scope.main = {
-                        page: 1,
-                        take: 15
-                    };
-                    scope.nextPage = function() {
-                        if (scope.main.page < scope.main.pages) {
-                            scope.main.page++;
+                    scope.currentPage = 0;
+                    scope.pagedItems = [];
+                    scope.itemsPerPage = scope.rpItems ? scope.rpItems : 5;
+                    scope.pagedItems = [];
+                    scope.gap = parseInt((scope.rpData.length / scope.itemsPerPage) == 0 ?
+                                                (scope.rpData.length / scope.itemsPerPage)
+                                                : (scope.rpData.length / scope.itemsPerPage) +1);
 
+                    for (var i = 0; i < scope.rpData.length; i++) {
+                        if (i % scope.itemsPerPage === 0) {
+                            scope.pagedItems[Math.floor(i / scope.itemsPerPage)] = [ scope.rpData[i] ];
+                        } else {
+                            scope.pagedItems[Math.floor(i / scope.itemsPerPage)].push(scope.rpData[i]);
+                        }
+                    }
+                    scope.prevPage = function () {
+                        if (scope.currentPage > 0) {
+                            scope.currentPage--;
                         }
                     };
 
-                    scope.previousPage = function() {
-                        if (scope.main.page > 1) {
-                            scope.main.page--;
-                            scope.loadPage();
+                    scope.nextPage = function () {
+                        if (scope.currentPage < scope.pagedItems.length - 1) {
+                            scope.currentPage++;
                         }
+                    };
+
+                    scope.setPage = function () {
+                        scope.currentPage = this.n;
+                    };
+
+                    scope.range = function (size,start, end) {
+                        var ret = [];
+                        if (size < end) {
+                            end = size;
+                            start = size-scope.gap;
+                        }
+                        for (var i = start; i < end; i++) {
+                            ret.push(i);
+                        }
+                        return ret;
                     };
                  }
             };
