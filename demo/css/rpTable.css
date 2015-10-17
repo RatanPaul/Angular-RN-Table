@@ -1,0 +1,12 @@
+.rpTable th{
+    text-align: center;
+}
+.headerNameDiv{
+    width:90%;
+    float: left;
+    cursor: pointer;
+}
+.headerFilterDiv{
+    width:10%;
+    float: left;
+}
