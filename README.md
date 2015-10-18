@@ -10,7 +10,7 @@ angular table
 ```
 Add rpTable
 ```
-<table class="table table-bordered rpTable" rp-Table="" rp-Data="users" rp-Col-Defs="cols">
+<table class="table table-bordered rpTable" rp-Table="" rp-Data="users" rp-Col-Defs="cols" rp-Items="5">
 </table>
 ```
 
