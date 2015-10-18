@@ -5,6 +5,62 @@
 (function(angular) {
     'use strict';
     angular.module('rpTable', [])
+        .run(function($templateCache) {
+            $templateCache.put('view/table.html', '<thead>'+
+                '    <tr >'+
+                '        <th ng-repeat="col in rpColDefs" >'+
+                '            <div class="headerNameDiv" ng-show="!col.sortable">'+
+                '                {{col.displayName || col.field}}'+
+                '            </div>'+
+                '            <div class="headerNameDiv" ng-click="sort(col.field)" ng-show="col.sortable">'+
+                '                {{col.displayName || col.field}}'+
+                '                <span class="glyphicon sort-icon" ng-show="sortKey === col.field" ng-class="{\'glyphicon-chevron-up\':!reverse,\'glyphicon-chevron-down\':reverse}"></span>'+
+                '            </div>'+
+                '            <div class="headerFilterDiv" ng-show="col.filterable">'+
+                '                <span class="glyphicon glyphicon-filter" ng-style="col.isFilterDisplay && {\'color\':\'#0099CC\'}" style="cursor: pointer;" ng-click="displayFilter(col);"></span>'+
+                '            </div>'+
+                '            <div ng-style="{\'visibility\': col.isFilterDisplay && col.filterable?\'visible\':\'hidden\'}" >'+
+                '                <input type="{{col.sortingType}}"  class="form-control input-sm" ng-model="search[col.field]" placeholder="Search by {{col.displayName || col.field}}">'+
+                '            </div>'+
+                '        </th>'+
+                '    </tr>'+
+                '</thead>'+
+                '<tbody>'+
+                '    <tr ng-repeat="data in pagedItems[currentPage] | orderBy:sortKey:reverse | filter:search | filter:globalSearch">'+
+                '        <td ng-repeat="col in rpColDefs">'+
+                '            <div ng-if="col.cellTemplate" compile="col.cellTemplate" cell-template-scope="col.cellTemplateScope"></div>'+
+                '            <div ng-if="!col.cellTemplate">{{data[col.field]}}</div>'+
+                '        </td>'+
+                '    </tr>'+
+                '</tbody>'+
+                '<tfoot>'+
+                '    <tr>'+
+                '        <td colspan="1"><input type="text" class="form-control input-sm" placeholder="Global Search" ng-model="globalSearch"/></td>'+
+                '        <td colspan="1"><button class="btn-primary btn btn-sm" ng-click="reset();">Reset</button></td>'+
+                '        <td colspan="{{rpColDefs.length}}-2">'+
+                '            <nav>'+
+                '                <ul class="pagination pull-right" style="margin: 0px; ">'+
+                '                    <li ng-class="{disabled: currentPage == 0}">'+
+                '                        <a href="#" aria-label="Previous" ng-click="prevPage()">'+
+                '                            <span aria-hidden="true">&laquo;</span>&nbsp;&nbsp;Prev'+
+                '                        </a>'+
+                '                    </li>'+
+                '                    <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "'+
+                '                        ng-class="{active: n == currentPage}"'+
+                '                        ng-click="setPage()">'+
+                '                        <a href ng-bind="n + 1">1</a>'+
+                '                    </li>'+
+                '                    <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">'+
+                '                        <a href="#" aria-label="Next" ng-click="nextPage()">'+
+                '                            Next&nbsp;&nbsp;<span aria-hidden="true">&raquo;</span>'+
+                '                        </a>'+
+                '                    </li>'+
+                '                </ul>'+
+                '            </nav>'+
+                '        </td>'+
+                '    </tr>'+
+                '</tfoot>');
+        })
         .directive('rpTable', function() {
             return {
                 restrict: 'A',
