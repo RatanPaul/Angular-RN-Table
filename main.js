@@ -48,7 +48,7 @@ myApp.controller('tableCtrl', function($scope)
         },
         {
             Id: 14,Name: 'Test Name 5',Age : 16,
-            Country: 'CHINA',BirthDay: "20-12-2004"
+            Country: 'CHINA',BirthDay: "12/20/2015"
         },
     ];
     $scope.cols = [{

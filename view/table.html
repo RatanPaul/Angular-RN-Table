@@ -12,7 +12,7 @@
                 <span class="glyphicon glyphicon-filter" ng-style="col.isFilterDisplay && {'color':'#0099CC'}" style="cursor: pointer;" ng-click="displayFilter(col);"></span>
             </div>
             <div ng-style="{'visibility': col.isFilterDisplay && col.filterable?'visible':'hidden'}" >
-                <input type="{{col.sortingType}}"  class="form-control input-sm" ng-model="search.col.field" placeholder="Search by {{col.displayName || col.field}}">
+                <input type="{{col.sortingType}}"  class="form-control input-sm" ng-model="search[col.field]" placeholder="Search by {{col.displayName || col.field}}">
             </div>
         </th>
     </tr>

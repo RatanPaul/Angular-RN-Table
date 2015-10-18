@@ -17,6 +17,14 @@
                 link: function(scope, element, attrs)
                 {
                     scope.sortKey = '';
+                    scope.currentPage = 0;
+                    scope.pagedItems = [];
+                    scope.itemsPerPage = scope.rpItems ? scope.rpItems : 5;
+                    scope.pagedItems = [];
+                    scope.search = {};
+
+                    for(var i =0; i < scope.rpColDefs.length; i++) if(scope.rpColDefs[i].filterable) scope.search[scope.rpColDefs[i].field] = '';
+
                     scope.sort = function(keyname){
                         scope.sortKey = keyname;
                         scope.reverse = !scope.reverse;
@@ -24,17 +32,17 @@
                     scope.displayFilter = function(col){
                         if(col.filterable)
                             col.isFilterDisplay = col.isFilterDisplay ? false : true;
+                        if(!col.isFilterDisplay) scope.search[col.field] = '';
                     }
                     scope.reset = function(){
                         scope.sortKey = '';
                        for(var i = 0; i < scope.rpColDefs.length; i++){
                            scope.rpColDefs[i].isFilterDisplay = false;
+                           scope.search[scope.rpColDefs[i].field] = '';
                        }
+                        scope.globalSearch = '';
                     }
-                    scope.currentPage = 0;
-                    scope.pagedItems = [];
-                    scope.itemsPerPage = scope.rpItems ? scope.rpItems : 5;
-                    scope.pagedItems = [];
+
                     scope.gap = parseInt((scope.rpData.length / scope.itemsPerPage) == 0 ?
                                                 (scope.rpData.length / scope.itemsPerPage)
                                                 : (scope.rpData.length / scope.itemsPerPage) +1);
@@ -73,6 +81,7 @@
                         }
                         return ret;
                     };
+
                  }
             };
         })
