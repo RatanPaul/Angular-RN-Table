@@ -1,4 +1,4 @@
-# Angular-RP-Table
+# Angular-RN-Table
 angular table
 
 # Dependencies
