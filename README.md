@@ -3,14 +3,14 @@ angular table
 
 # Dependencies
 ```
-<link rel="stylesheet" href="bootstrap.css"/>
-<link rel="stylesheet" href="rpTable.css"/>
-<script src="angular.js"></script>
-<script src="rpTable.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.css"/>
+<link rel="stylesheet" href="css/rnTable.css"/>
+<script src="bower_components/angular/angular.js"></script>
+<script src="js/rnTable.js"></script>
 ```
 Add rpTable
 ```
-<table class="table table-bordered rpTable" rp-Table="" rp-Data="users" rp-Col-Defs="cols" rp-Items="5">
+<table class="table table-bordered rnTable" rn-Table="" rn-Data="users" rn-Col-Defs="cols" rn-Items="5">
 </table>
 ```
 
