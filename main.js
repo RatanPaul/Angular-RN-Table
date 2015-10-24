@@ -1,4 +1,4 @@
-var myApp = angular.module('tableApp', ['rpTable']);
+var myApp = angular.module('tableApp', ['rnTable']);
 
 myApp.controller('tableCtrl', function($scope)
 {
