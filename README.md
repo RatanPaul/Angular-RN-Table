@@ -8,7 +8,7 @@ angular table
 <script src="bower_components/angular/angular.js"></script>
 <script src="js/rnTable.js"></script>
 ```
-Add rpTable
+Add rnTable
 ```
 <table class="table table-bordered rnTable" rn-Table="" rn-Data="users" rn-Col-Defs="cols" rn-Items="5">
 </table>
